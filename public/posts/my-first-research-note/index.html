@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Fourier Series | dStory</title>
+<meta name="keywords" content="tag">
+<meta name="description" content="summary">
+<meta name="author" content="Donggyu Lee">
+<link rel="canonical" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/my-first-research-note/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/my-first-research-note/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false}
+    ]
+  });">
+</script>
+<meta property="og:url" content="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/my-first-research-note/">
+  <meta property="og:site_name" content="dStory">
+  <meta property="og:title" content="Fourier Series">
+  <meta property="og:description" content="summary">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Tag">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fourier Series">
+<meta name="twitter:description" content="summary">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Fourier Series",
+      "item": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/my-first-research-note/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Fourier Series",
+  "name": "Fourier Series",
+  "description": "summary",
+  "keywords": [
+    "tag"
+  ],
+  "articleBody": "The Motivating Problem In this post, I pose a motivating problem for undergrad level real analysis. In the 19th century, French mathematician Joseph Fourier striked the math community with the claim that:\nFourier’s Claim\nEvery reasonable periodic function $f$ can be expressed with (infinite) linear combination of sines and cosines. That is, $$f(x) \\sim a_0 + \\sum_{n=1}^{\\infty} (a_n\\cos nx + b_n\\sin nx)$$\nHere, reasonable allows sharp corners and discontinuities. But intuitively, can an infinite sum of smooth functions result in such cases? How far can we get with sine and cosine? Follows the main question of this post: suppose sine and cosine are the basis of a function space $X$. What exactly is $X$, and how do we prove this?\nNotation Before anything, note that using exponential form tidies up the notation. Using Euler’s formula, the conversion\n$$a_0 + \\sum_{n=1}^{N} (a_n\\cos nx + b_n\\sin nx) = \\sum_{n=-N}^{N}c_ne^{inx}$$\ncan be made, where $a_n, b_n, c_n \\in \\mathbb{C}$. Finding the expression of ${ c_n: n\\in\\mathbb{Z} }$ in terms of $a_n, b_n$ is left as an exercise.\nThe $\\mathcal{R}^2$ Space Our goal is to find what type of function space will $\\lbrace e^{inx}: n\\in \\mathbb{Z} \\rbrace$ be a basis of. In order to make sense of approximating various functions, our function space $X$ must be an (complex) inner product space. As an extension of finite space inner products, it is natural to define it as:\n$$\\langle f, g\\rangle = \\int_{I}f\\bar{g}$$\nSince we deal with periodic functions, we can put $I=[-\\pi, \\pi]$ $The norm follows as:\n$$||f|| = \\int_I |f|^2 $$\nFor this norm to be well-defined, it seems natural to limit $X$ to functions such that $ \\int_I |f|^2 \u003c \\infty$. We re-name this functioal space $X$ as the $\\mathcal{R}^2$ space, or more specifically, $\\mathcal{R}^2[-\\pi, \\pi]$.\nOrthogonality The subset $\\lbrace e^{inx}: n\\in \\mathbb{Z} \\rbrace \\subset \\mathcal{R}^2[-\\pi, \\pi] $ is orthogonal, which is easy to see via direct algebra. For simplicity, let us define $u_n = e^{inx}$. Then, with $n\\neq m,$\n$$ \\begin{aligned} \\langle u_n, u_m \\rangle \u0026= \\int_{-\\pi}^{\\pi} e^{inx} e^{-imx} dx \\\\ \u0026= \\int_{-\\pi}^{\\pi} e^{i(n-m)x} dx \\\\ \u0026= 0 \\quad \\because\\text{\\small full cycle} \\end{aligned} $$ whereas $n=m$ leads to $\\langle u_n, u_m \\rangle = 2\\pi$. Thus, $\\lbrace e^{inx}: n\\in \\mathbb{Z} \\rbrace$ becomes an orthonormal subset if we redefine the inner product as\n$$\\langle f, g\\rangle = \\cfrac{1}{2\\pi}\\int_{I}f\\bar{g}.$$\nBessel’s Inequality Given any $f\\in \\mathcal{R}^2[-\\pi, \\pi]$, how should we express, or approximate, it with our orthonormal subset $\\lbrace e^{inx}: n\\in \\mathbb{Z} \\rbrace$? Formally, which coefficients $\\lbrace c_n \\rbrace$ will minimize the distance between $f$ and $\\sum c_n u_n$? With insights from linear algebra, the answer is the projection of $f$ on $\\text{span}\\lbrace e^{inx}\\rbrace$. That is,\nProposition 1.\n$c_n = \\langle f, u_n\\rangle$ leads to the minimum distance. For other arbitrary coefficients $\\lbrace z_n \\rbrace$, $$\\left\\lVert f - \\sum_{n=-N}^{N} c_n u_n \\right\\rVert \\leq \\left\\lVert f - \\sum_{n=-N}^{N} z_n u_n \\right\\rVert, \\quad {\\small N=1,2,\\dots} $$\n\\\n",
+  "wordCount" : "479",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Donggyu Lee"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/my-first-research-note/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "dStory",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/" accesskey="h" title="dStory (Alt + H)">dStory</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Fourier Series
+    </h1>
+    <div class="post-meta"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>Donggyu Lee</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="the-motivating-problem">The Motivating Problem<a hidden class="anchor" aria-hidden="true" href="#the-motivating-problem">#</a></h3>
+<p>In this post, I pose a motivating problem for undergrad level real analysis.
+In the 19th century, French mathematician Joseph Fourier striked the math community with the claim that:</p>
+<blockquote>
+<p><strong>Fourier&rsquo;s Claim</strong></p>
+<p>Every <em>reasonable</em> periodic function $f$ can be expressed with (infinite) linear combination of sines and cosines. That is,
+$$f(x) \sim a_0 + \sum_{n=1}^{\infty} (a_n\cos nx + b_n\sin nx)$$</p>
+</blockquote>
+<p>Here, <em>reasonable</em> allows sharp corners and discontinuities. But intuitively, can an infinite sum of <em>smooth</em> functions result in such cases? How far can we get with sine and cosine? Follows the main question of this post: suppose sine and cosine are the <strong>basis</strong> of a function space $X$. What exactly is $X$, and how do we prove this?</p>
+<h3 id="notation">Notation<a hidden class="anchor" aria-hidden="true" href="#notation">#</a></h3>
+<p>Before anything, note that using exponential form tidies up the notation. Using Euler&rsquo;s formula, the conversion</p>
+<p>$$a_0 + \sum_{n=1}^{N} (a_n\cos nx + b_n\sin nx) = \sum_{n=-N}^{N}c_ne^{inx}$$</p>
+<p>can be made, where $a_n, b_n, c_n \in \mathbb{C}$. Finding the expression of ${ c_n: n\in\mathbb{Z} }$ in terms of $a_n, b_n$ is left as an exercise.</p>
+<h3 id="the-mathcalr2-space">The $\mathcal{R}^2$ Space<a hidden class="anchor" aria-hidden="true" href="#the-mathcalr2-space">#</a></h3>
+<p>Our goal is to find what type of function space will $\lbrace e^{inx}: n\in \mathbb{Z} \rbrace$ be a basis of. In order to make sense of approximating various functions, our function space $X$ must be an (complex) inner product space. As an extension of finite space inner products, it is natural to define it as:</p>
+<p>$$\langle f, g\rangle = \int_{I}f\bar{g}$$</p>
+<p>Since we deal with periodic functions, we can put $I=[-\pi, \pi]$ $The norm follows as:</p>
+<p>$$||f|| = \int_I |f|^2 $$</p>
+<p>For this norm to be well-defined, it seems natural to limit $X$ to functions such that $ \int_I |f|^2 &lt; \infty$. We re-name this functioal space $X$ as the $\mathcal{R}^2$ space, or more specifically, $\mathcal{R}^2[-\pi, \pi]$.</p>
+<h3 id="orthogonality">Orthogonality<a hidden class="anchor" aria-hidden="true" href="#orthogonality">#</a></h3>
+<p>The subset $\lbrace e^{inx}: n\in \mathbb{Z} \rbrace \subset \mathcal{R}^2[-\pi, \pi] $ is <strong>orthogonal</strong>, which is easy to see via direct algebra. For simplicity, let us define
+$u_n = e^{inx}$. Then, with $n\neq m,$</p>
+<p>$$
+\begin{aligned}
+\langle u_n, u_m \rangle &amp;= \int_{-\pi}^{\pi} e^{inx} e^{-imx} dx \\
+&amp;= \int_{-\pi}^{\pi} e^{i(n-m)x} dx  \\
+&amp;= 0   \quad \because\text{\small full cycle}
+\end{aligned}
+$$
+whereas $n=m$ leads to $\langle u_n, u_m \rangle = 2\pi$. Thus, $\lbrace e^{inx}: n\in \mathbb{Z} \rbrace$ becomes an <strong>orthonormal</strong> subset if we redefine the inner product as</p>
+<p>$$\langle f, g\rangle = \cfrac{1}{2\pi}\int_{I}f\bar{g}.$$</p>
+<h3 id="bessels-inequality">Bessel&rsquo;s Inequality<a hidden class="anchor" aria-hidden="true" href="#bessels-inequality">#</a></h3>
+<p>Given any $f\in \mathcal{R}^2[-\pi, \pi]$, how should we express, or approximate, it with our orthonormal subset $\lbrace e^{inx}: n\in \mathbb{Z} \rbrace$? Formally, which coefficients $\lbrace c_n \rbrace$ will minimize the <em>distance</em> between $f$ and $\sum c_n u_n$? With insights from linear algebra, the answer is the <strong>projection</strong> of $f$ on $\text{span}\lbrace e^{inx}\rbrace$. That is,</p>
+<blockquote>
+<p><strong>Proposition 1.</strong></p>
+<p>$c_n = \langle f, u_n\rangle$ leads to the minimum distance. For other arbitrary coefficients $\lbrace z_n \rbrace$,
+$$\left\lVert f - \sum_{n=-N}^{N} c_n u_n \right\rVert \leq \left\lVert f - \sum_{n=-N}^{N} z_n u_n \right\rVert, \quad {\small N=1,2,\dots} $$</p>
+</blockquote>
+<p>\</p>
+<h2></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/tags/tag/">Tag</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/">dStory</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

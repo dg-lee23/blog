@@ -1,0 +1,19 @@
+.expand-box {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fdfdfd;
+}
+
+.expand-label {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.expand-content {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px inset #eee;
+}
