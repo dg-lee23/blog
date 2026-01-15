@@ -344,3 +344,6 @@ while $\sigma_n$ is a (finite) linear combination of basis vectors of $\mathcal{
 > **The Answer**
 >
 > $\mathcal{B}$ is a basis of $X = \mathcal{R}^2$.
+
+### Remarks & Bibligraphy
+This post is largely based on the notation and framework of *Introduction to Mathematical Analysis* (Kim, Kim & Kyhe, 2011, Korean title: *해석개론*). For the scope of this post, the space of Riemann-integrable functions $\mathcal{R}^2$ and the Lebesgue space $L^2$ may be used interchangeably without loss of generality.
