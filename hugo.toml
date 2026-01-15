@@ -2,7 +2,7 @@ baseURL = 'https://dg-lee23.github.io/hugo-blog'
 languageCode = 'en-us'
 title = 'dStory'
 theme = 'PaperMod'
-
+enableRobotsTXT = true
 [params]
     env = 'production'
     description = "ML/DL Research & Learning Process"
