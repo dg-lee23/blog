@@ -1,5 +1,5 @@
 ---
-title: "Fourier Series"
+title: "Fourier Series - A Motivating Introduction"
 date: 2026-01-13
 draft: false
 tags: ["Analysis", "Fourier Series"]
