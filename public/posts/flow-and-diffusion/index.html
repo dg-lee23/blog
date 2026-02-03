@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+
+<meta name="google-site-verification" content="NKIbBzC4uleEPu4HGPw3tOs4HWpcaL8__xeNFuTvlbA" />
+<title>What Actually &#34;Flows&#34; in Flow Models? | dStory</title>
+<meta name="keywords" content="Generative AI, Diffusion, Flow">
+<meta name="description" content="How to transport noise into data using ODEs">
+<meta name="author" content="Donggyu Lee">
+<link rel="canonical" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false}
+    ]
+  });">
+</script>
+<meta property="og:url" content="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/">
+  <meta property="og:site_name" content="dStory">
+  <meta property="og:title" content="What Actually &#34;Flows&#34; in Flow Models?">
+  <meta property="og:description" content="How to transport noise into data using ODEs">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-01T00:00:00+00:00">
+    <meta property="article:tag" content="Generative AI">
+    <meta property="article:tag" content="Diffusion">
+    <meta property="article:tag" content="Flow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What Actually &#34;Flows&#34; in Flow Models?">
+<meta name="twitter:description" content="How to transport noise into data using ODEs">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "What Actually \"Flows\" in Flow Models?",
+      "item": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Actually \"Flows\" in Flow Models?",
+  "name": "What Actually \u0022Flows\u0022 in Flow Models?",
+  "description": "How to transport noise into data using ODEs",
+  "keywords": [
+    "Generative AI", "Diffusion", "Flow"
+  ],
+  "articleBody": "Motivation Generative models aim to find the link between the latent distribution $p_\\text{init}$ (noise) and the data distribution $p_\\text{data}$. Let us frame this as a transportation problem:\nGeneration as Transport\nGeneration is transporting samples from $p_\\text{init}$ to the $p_\\text{data}$ manifold by following a “flow”.\nThink of flow as a time-dependent vector field that represents velocity. Then, generation is as simple as:\nSample from $p_\\text{init}$. Follow the velocity lines. We end up in the data manifold, $p_\\text{data}$. Let us formulate this more cleanly in the language of Ordinary Differential Equations (ODEs).\nThe ODE Framework Suppose we start at an initial position $X_0\\sim p_\\text{init}$ and move along a path $X_t$ dictated by a (time-varying) vector field $u_t$. In ODE-terms,\n$$\\frac{d}{dt} X_t = u_t(X_t), \\quad t\\in[0,1] \\tag{1}$$ Simply, $u_t$ is the velocity at each position.\nFlow models parameterize this vector field with a neural network $u_t^{\\theta}$ . Once learning is done, we can sample any $X_0 \\sim p_{\\text{init}}$ and use numerical methods to solve the ODE above for generation. Euler’s method is a solid choice:\n$$X_{t+h} \\approx X_t + h\\cdot u_t(X_t) \\tag{2}.$$ Flow Models\nFlow models aim to train $u_t^{\\theta}$ such that it will transport any $X_0 \\sim p_{\\text{init}}$ to $X_1\\sim p_{\\text{data}}$.\nBut how do we construct such vector fields? What is our training target?\nProbability Paths We need to construct $u_t$, but all we have is samples from $p_{\\text{data}}$. Therefore, let us simplify the problem by fixing one specific data point $z$. Our simplified goal becomes finding a conditional vector field $u_t(\\cdot|z)$ that forces the transport:\n$$p_{\\text{init}} \\rightarrow \\delta_z $$where $\\delta_z$ is a Dirac-delta distribution. It is natural to consider what happens between these boundaries; thus, we define a conditional probability path $\\lbrace p_t(x|z) \\rbrace_t$ that anchors the flow:\n$$p_0(\\cdot | z) = p_{\\text{init}} \\qquad p_1(\\cdot | z) = \\delta_z \\tag{3}$$ Among various possible paths, we present the simplest example below.\nExample: Gaussian Probability Paths A common choice is the Gaussian Probability Path. To satisfy the boundary condition in Eq. 3, a natural construction would be:\n$$p_t(\\cdot | z) = \\mathcal{N}(\\alpha_tz, \\beta_t^2I_d)$$where $\\alpha_t, \\beta_t$ are noise schedulers. To satisfy the boundary conditions, we need\n$$\\alpha_0=\\beta_1=0 \\quad \\text{\\small (making $p_0=\\mathcal{N}(0, I_d)$)}$$$$\\alpha_1=\\beta_0=1 \\quad \\text{\\small (making $p_1=\\delta_z$)}$$ In most cases, the conditional vector field that induces the transport $p_{\\text{init}} \\rightarrow \\delta_z $ is easy to find (by hand). Again, we continue the example with Gaussian probability paths.\nExample: Deriving Conditional Target Vector Fields The problem becomes trivial once it is nicely stated (try it yourself!).\nProblem. Find the vector field $u_t(x|z)$ that induces the flow for the Gaussian path $$x_t \\sim p_t(x|z) = \\mathcal{N}(\\alpha_tz, \\beta_t^2I_d)$$ according to the ODE $\\frac{dx_t}{dt} = u_t(x_t|z).$ Solution.\nAll we have to do is calculate the time derivative of $x_t$. We thus use the reparameterization trick and write:\n$$x_t = \\alpha_t z + \\beta_t \\epsilon, \\qquad \\epsilon\\sim\\mathcal{N}(0,I)$$Then,\n$$\\frac{dx_t}{dt}=\\dot{\\alpha}_t z + \\dot{\\beta}_t \\epsilon = u_t(x_t | z)$$where ${\\small \\dot{\\alpha}_t = \\partial_t \\alpha_t, \\dot{\\beta}_t = \\partial_t \\beta_t}$ denote the time derivatives.\nEliminating $\\epsilon$ and fixing the notation with ($x_t \\rightarrow x$) gives:\n$$ \\begin{aligned} u_t( x | z) \u0026= \\dot{\\alpha}_t z + \\dot{\\beta}_t (\\frac{x_t - \\alpha_tz}{\\beta_t}) \\\\\\\\ \u0026= (\\dot{\\alpha_t} - \\frac{\\dot{\\beta_t}}{\\beta_t}\\alpha_t)z + \\frac{\\dot{\\beta_t}}{\\beta_t}x \\end{aligned} $$ The Continuity Equation We showed that the conditional vector fields $u_t(x|z)$ are easy to find, but what we need is the marginal vector field $u_t(x)$, which works for the entire dataset.\nTo derive $u_t(x)$, we must first introduce the continuity equation.\nThe Continuity Equation\n$$\\underbrace{\\frac{\\partial}{\\partial t} p_t}_{\\text{net inflow}} + \\underbrace{\\nabla \\cdot (p_tu_t)}_{\\text{net outflow}}=0$$ Intuitively, the equation states that probability mass is conserved. This is a necessary condition that our vector fields must satisfy; otherwise, probability leaks during the transport process.\nThe Marginalization Trick Suppose we are given $z$. We can construct a probability path $p_t(x|z)$ (e.g. Gaussian) and analytically find the corresponding vector field $u_t(x|z)$. That is, we have a “local” solution: a pair $(p_t(x|z), u_t(x|z))$, that should satisfy the continuity equation:\n$$\\frac{\\partial}{\\partial t}p_t(x|z) + \\nabla \\cdot (p_t(x|z)u_t(x|z)) = 0$$Our goal is to find a “global” vector field that works for the entire dataset—we need to eliminate $z$, by averaging over it.\nWe multiply both sides by $p_\\text{data}(z)$ and integrate to get\n$$\\int \\frac{\\partial}{\\partial t}p_t(x|z) {\\color{red}{p_\\text{data}(z)}} dz + \\int \\nabla \\cdot (p_t(x|z)u_t(x|z)) {\\color{red}{p_\\text{data}(z)}} dz = 0$$Since the derivatives are w.r.t. $t$ and $x$, and the integral is over $z$, we can swap orders:\n$$\\frac{\\partial}{\\partial t} \\int {p_t(x|z) p_\\text{data}(z)} dz + \\nabla \\cdot ( \\int p_t(x|z)u_t(x|z) {p_\\text{data}(z)} dz ) = 0$$The first term is the marginal distributuion $p_t(x)$, defined as\n$$p_t(x) = \\int p_t(x|z)p_{\\text{data}}(z) dz$$We then have:\n$$\\frac{\\partial}{\\partial t} p_t(x) + \\nabla \\cdot ( \\int p_t(x|z)u_t(x|z) {p_\\text{data}(z)} dz ) = 0$$To make the second term match the form of the continuity equation, we define the marginal vector field $u_t(x)$ such that:\n$$u_t(x) = \\int u_t(x|z) \\frac{p_t(x|z) p_{\\text{data}}(z)}{p_t(x)} dz \\tag{6} $$ Note the trick here—we have defined $u_t(x)$ such that the marginal pair $(p_t(x), u_t(x))$ also satisfies the continuity equation.\nWhile we are fortunate to have $u_t(x)$ in closed form, it remains intractable (we cannot integrate over all $z$). Nevertheless, we actually don’t need to compute this integral, as we will see in the next section.\nThe Flow Matching Loss With the marginal vector field $u_t(x)$ defined in Eq. 6, the target for our neural network $u_t^{\\theta}$ is clear. The definition of flow matching loss comes naturally:\n$$\\mathcal{L}_{\\text{FM}}(\\theta) = \\mathbb{E}_{t \\sim U, x \\sim p_t} [|| u_t^{\\theta}(x) - u_t(x) ||^2] \\tag{7}$$ where $U$ is a uniform distribution over $[0,1]$. Since $u_t(x)$ is intractable whatsoever, we consider its “local” counterpart: the conditional vector field $u_t(x|z)$. The conditional flow matching loss is defined as:\n$$\\mathcal{L}_{\\text{CFM}}(\\theta) = \\mathbb{E}_{t \\sim U, z \\sim p_{\\text{data}}, x \\sim p_t(\\cdot|z)} [|| u_t^{\\theta}(x) - u_t(x | z) ||^2] \\tag{8}$$ The essential idea is: since we average over all data points $z$ anyways, wouldn’t minimizing the “local” loss $\\mathcal{L}_{\\text{CFM}}$ also minimize the “global” loss $\\mathcal{L}_{\\text{FM}}$?\nTheorem.\nThe losses $\\mathcal{L}_{\\text{FM}}(\\theta)$ and $\\mathcal{L}_{\\text{CFM}}(\\theta)$ are equivalent (up to a constant). Specifically, they share the same gradients: $$\\nabla_{\\theta} \\mathcal{L}_{\\text{FM}}(\\theta) = \\nabla_{\\theta} \\mathcal{L}_{\\text{CFM}}(\\theta) $$ Proof We first expand $\\mathcal{L}_{\\text{FM}}$ and $\\mathcal{L}_{\\text{CFM}}$ respectively. Note that the terms $||u_t(x)||^2$ and $||u_t(x|z)||^2$ do not depend on our parameter $\\theta$, so we can treat them as constants $C_1, C_2$.\n$$ \\begin{aligned} \\mathcal{L}_{\\text{FM}} \u0026= \\mathbb{E}_{t \\sim U, x \\sim p_t} [|| u_t^{\\theta}(x) ||^2] - 2 \\mathbb{E}_{t \\sim U, x \\sim p_t} [u_t^{\\theta}(x)^T {\\color{blue}{u_t(x)}}] + C_1 \\\\\\\\ \\end{aligned} $$$$ \\begin{aligned} \\mathcal{L}_{\\text{CFM}} \u0026= \\mathbb{E}_{t \\sim U, z \\sim p_{\\text{data}}, x \\sim p_t(\\cdot|z)} [|| u_t^{\\theta}(x) ||^2] - 2 \\mathbb{E}_{t \\sim U, z \\sim p_{\\text{data}}, x \\sim p_t(\\cdot|z)} [u_t^{\\theta}(x)^T {\\color{red}{u_t(x|z)}}] + C_2 \\\\\\\\ \\end{aligned} $$The first terms are identical since $\\mathbb{E}_{t,z,x}[f(x)] = \\mathbb{E}_{t,x}[f(x)]$. It remains to compare the inner product terms. By substituting our definition of the marginal vector field $u_t(x)$ from Eq. 6:\n$$ \\begin{aligned} \\mathbb{E}_{t \\sim U, x \\sim p_t} [u_t^{\\theta}(x)^T {\\color{blue}{u_t(x)}}] \u0026= \\int \\int p_t(x) u_t^{\\theta}(x)^T \\left[ \\int u_t(x|z) \\frac{p_t(x|z) p_{\\text{data}}(z)}{p_t(x)} dz \\right] dx dt \\\\\\\\ \u0026= \\int \\int \\int u_t^{\\theta}(x)^T u_t(x|z) p_t(x|z) p_{\\text{data}}(z) dz dx dt \\\\\\\\ \u0026= \\mathbb{E}_{t \\sim U, z \\sim p_{\\text{data}}, x \\sim p_t(\\cdot|z)} [u_t^{\\theta}(x)^T {\\color{red}{u_t(x|z)}}] \\end{aligned} $$Since the inner products (and thus the gradients) are identical, the theorem follows.\nThe key takeaway is that:\nBy simply training our network to point toward individual data points $z$, it automatically learns to follow the complex, marginal flow of the entire distribution.\nWe end the post with an example of explicitly calculating $\\mathcal{L}_{\\text{CFM}}$.\nExample: $\\mathcal{L}_{\\text{CFM}}$ for Gaussian Paths Let us explicitly compute $\\mathcal{L}_{\\text{CFM}}$ in the case of Gaussian probability paths,\n$$p_t(x|z) = \\mathcal{N}(\\alpha_tz, \\beta_t^2I_d) $$In this case, $x_t \\sim p_t(\\cdot | z)$ implies:\n$$x_t = \\alpha_tz + \\beta_t\\epsilon$$where $\\epsilon \\sim \\mathcal{N}(0, I_d)$.\nRecall from Eq. 5 that the conditional vector field was found to be:\n$$u_t( x | z) = (\\dot{\\alpha_t} - \\frac{\\dot{\\beta_t}}{\\beta_t}\\alpha_t)z + \\frac{\\dot{\\beta_t}}{\\beta_t}x$$Then, by Eq. 8,\n$$ \\begin{aligned} \\mathcal{L}_{\\text{CFM}} \u0026= \\mathbb{E}_{t \\sim U, z\\sim p_{\\text{data}}, x \\sim p_t} [|| u_t^{\\theta}(x) - (\\dot{\\alpha_t} - \\frac{\\dot{\\beta_t}}{\\beta_t}\\alpha_t)z - \\frac{\\dot{\\beta_t}}{\\beta_t}x ||^2] \\\\\\\\ \u0026= \\mathbb{E}_{t \\sim U, z\\sim p_{\\text{data}}, \\epsilon \\sim \\mathcal{N}(0, I_d)} [ || u_t^{\\theta}(\\alpha_tz + \\beta_t\\epsilon) - (\\dot{\\alpha}_tz + \\dot{\\beta}_t\\epsilon)||^2] \\end{aligned} $$The expression above can be further simplified if we explicitly set $\\alpha_t=t, \\beta_t=1-t$. We obtain:\n$$\\mathcal{L}_{\\text{CFM}} = \\mathbb{E}_{t \\sim U, z\\sim p_{\\text{data}}, \\epsilon \\sim \\mathcal{N}(0, I_d)} [ || u_t^{\\theta}(tz + (1-t)\\epsilon) - (z-\\epsilon)||^2] $$Note that both the sampling procedure (of $t, z, \\epsilon$) and the computation of each term is incredibly simple.\nRemarks \u0026 Bibligraphy This post presents my understanding of the MIT course Introduction to Flow Matching and Diffusion Models (Holderrieth \u0026 Erives, 2025). Refer to the original source for further details and explanations.\n",
+  "wordCount" : "1408",
+  "inLanguage": "en",
+  "datePublished": "2026-02-01T00:00:00Z",
+  "dateModified": "2026-02-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Donggyu Lee"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "dStory",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/" accesskey="h" title="dStory (Alt + H)">dStory</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      What Actually &#34;Flows&#34; in Flow Models?
+    </h1>
+    <div class="post-meta"><span title='2026-02-01 00:00:00 +0000 UTC'>February 1, 2026</span>&nbsp;·&nbsp;<span>Donggyu Lee</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="motivation">Motivation<a hidden class="anchor" aria-hidden="true" href="#motivation">#</a></h3>
+<p>Generative models aim to find the link between the latent distribution $p_\text{init}$ (noise) and the data distribution $p_\text{data}$. Let us frame this as a <strong>transportation</strong> problem:</p>
+<blockquote>
+<p><strong>Generation as Transport</strong></p>
+<p>Generation is <em>transporting</em> samples from $p_\text{init}$ to the $p_\text{data}$ manifold by following a &ldquo;flow&rdquo;.</p>
+</blockquote>
+<p>Think of <em>flow</em> as a time-dependent vector field that represents velocity. Then, generation is as simple as:</p>
+<blockquote>
+<ol>
+<li>Sample from $p_\text{init}$.</li>
+<li>Follow the velocity lines.</li>
+<li>We end up in the data manifold, $p_\text{data}$.</li>
+</ol>
+</blockquote>
+<p>Let us formulate this more cleanly in the language of Ordinary Differential Equations (ODEs).</p>
+<h3 id="the-ode-framework">The ODE Framework<a hidden class="anchor" aria-hidden="true" href="#the-ode-framework">#</a></h3>
+<p>Suppose we start at an initial position $X_0\sim p_\text{init}$ and move along a <strong>path</strong> $X_t$ dictated by a (time-varying) <strong>vector field</strong> $u_t$. In ODE-terms,</p>
+<div id="eq.1">
+$$\frac{d}{dt} X_t = u_t(X_t), \quad t\in[0,1] \tag{1}$$
+</div>
+<p>Simply, $u_t$ is the velocity at each position.</p>
+<p><mark><strong>Flow models</strong> parameterize this vector field with a neural network $u_t^{\theta}$ </mark>. Once learning is done, we can sample any $X_0 \sim p_{\text{init}}$ and use numerical methods to solve the ODE above for generation. Euler&rsquo;s method is a solid choice:</p>
+<div id="eq.2">
+$$X_{t+h} \approx X_t + h\cdot u_t(X_t) \tag{2}.$$
+</div>
+<blockquote>
+<p><strong>Flow Models</strong></p>
+<p>Flow models aim to train $u_t^{\theta}$ such that it will transport any $X_0 \sim p_{\text{init}}$ to $X_1\sim p_{\text{data}}$.</p>
+</blockquote>
+<p>But how do we construct such vector fields? What is our training target?</p>
+<h3 id="probability-paths">Probability Paths<a hidden class="anchor" aria-hidden="true" href="#probability-paths">#</a></h3>
+<p>We need to construct $u_t$, but all we have is samples from $p_{\text{data}}$. Therefore, let us simplify the problem by fixing <em>one</em> specific data point $z$. Our simplified goal becomes finding a <strong>conditional vector field</strong> $u_t(\cdot|z)$ that forces the transport:</p>
+$$p_{\text{init}} \rightarrow \delta_z $$<p>where $\delta_z$ is a Dirac-delta distribution. It is natural to consider what happens <strong>between</strong> these boundaries; thus, we define a <strong>conditional probability path</strong>  $\lbrace p_t(x|z) \rbrace_t$ that anchors the flow:</p>
+<div id="eq.3">
+$$p_0(\cdot | z) = p_{\text{init}} \qquad p_1(\cdot | z) = \delta_z  \tag{3}$$
+</div>
+<p>Among various possible paths, we present the simplest example below.</p>
+<details>
+  <summary style="cursor: pointer; color: #007bff; font-weight: bold;">
+    Example: Gaussian Probability Paths
+  </summary>
+  <div style="padding: 10px; border-left: 2px solid #007bff; margin-top: 10px;">
+<p>A common choice is the <strong>Gaussian Probability Path.</strong> To satisfy the boundary condition in <a href="#eq.3">Eq. 3</a>, a natural construction would be:</p>
+$$p_t(\cdot | z) = \mathcal{N}(\alpha_tz, \beta_t^2I_d)$$<p>where $\alpha_t, \beta_t$ are <em>noise schedulers</em>. To satisfy the boundary conditions, we need</p>
+$$\alpha_0=\beta_1=0 \quad \text{\small (making $p_0=\mathcal{N}(0, I_d)$)}$$$$\alpha_1=\beta_0=1 \quad \text{\small (making $p_1=\delta_z$)}$$  </div>
+</details>
+<p>In most cases, the <strong>conditional vector field</strong> that induces the transport $p_{\text{init}} \rightarrow \delta_z $ is easy to find (by hand). Again, we continue the example with Gaussian probability paths.</p>
+<details>
+  <summary style="cursor: pointer; color: #007bff; font-weight: bold;">
+    Example: Deriving Conditional Target Vector Fields
+  </summary>
+  <div style="padding: 10px; border-left: 2px solid #007bff; margin-top: 10px;">
+<p>The problem becomes trivial once it is nicely stated (try it yourself!).</p>
+  <div style="background-color: #f4f4f459; padding: 15px; border-left: 5px solid #ccc;">
+    <b>Problem.</b>
+    <br>
+    Find the vector field $u_t(x|z)$ that induces the flow for the Gaussian path
+    $$x_t \sim p_t(x|z) = \mathcal{N}(\alpha_tz, \beta_t^2I_d)$$
+    <br>
+    according to the ODE $\frac{dx_t}{dt} = u_t(x_t|z).$
+  </div>
+  <div><br></div>
+<p><strong>Solution.</strong></p>
+<p>All we have to do is calculate the time derivative of $x_t$. We thus use the <strong>reparameterization trick</strong> and write:</p>
+$$x_t = \alpha_t z + \beta_t \epsilon, \qquad \epsilon\sim\mathcal{N}(0,I)$$<p>Then,</p>
+$$\frac{dx_t}{dt}=\dot{\alpha}_t z + \dot{\beta}_t \epsilon = u_t(x_t | z)$$<p>where ${\small \dot{\alpha}_t = \partial_t \alpha_t, \dot{\beta}_t = \partial_t \beta_t}$ denote the time derivatives.</p>
+<p>Eliminating $\epsilon$ and fixing the notation with ($x_t \rightarrow x$) gives:</p>
+$$
+  \begin{aligned}
+      u_t( x | z)  &= \dot{\alpha}_t z + \dot{\beta}_t (\frac{x_t - \alpha_tz}{\beta_t}) \\\\
+                   &= (\dot{\alpha_t} - \frac{\dot{\beta_t}}{\beta_t}\alpha_t)z + \frac{\dot{\beta_t}}{\beta_t}x
+  \end{aligned}
+  $$  </div>
+</details>
+<h3 id="the-continuity-equation">The Continuity Equation<a hidden class="anchor" aria-hidden="true" href="#the-continuity-equation">#</a></h3>
+<p>We showed that the conditional vector fields $u_t(x|z)$ are easy to find, but what we need is the <strong>marginal vector field</strong> $u_t(x)$, which works for the entire dataset.</p>
+<p>To derive $u_t(x)$, we must first introduce the <strong>continuity equation</strong>.</p>
+<blockquote>
+<p><strong>The Continuity Equation</strong></p>
+$$\underbrace{\frac{\partial}{\partial t} p_t}_{\text{net inflow}} + \underbrace{\nabla \cdot (p_tu_t)}_{\text{net outflow}}=0$$</blockquote>
+<p>Intuitively, the equation states that <strong><span style="color:#007bff;">probability mass is conserved</span></strong>. This is a necessary condition that our vector fields must satisfy; otherwise, probability <em>leaks</em> during the transport process.</p>
+<h3 id="the-marginalization-trick">The Marginalization Trick<a hidden class="anchor" aria-hidden="true" href="#the-marginalization-trick">#</a></h3>
+<p>Suppose we are given $z$. We can construct a probability path $p_t(x|z)$ (e.g. Gaussian) and analytically find the corresponding vector field $u_t(x|z)$. That is, we have a &ldquo;local&rdquo; solution: a pair $(p_t(x|z), u_t(x|z))$, that should satisfy the continuity equation:</p>
+$$\frac{\partial}{\partial t}p_t(x|z) + \nabla \cdot (p_t(x|z)u_t(x|z)) = 0$$<p>Our goal is to find a &ldquo;global&rdquo; vector field that works for the entire dataset—we need to eliminate $z$, by averaging over it.</p>
+<p>We multiply both sides by $p_\text{data}(z)$ and integrate to get</p>
+$$\int \frac{\partial}{\partial t}p_t(x|z) {\color{red}{p_\text{data}(z)}} dz + \int \nabla \cdot (p_t(x|z)u_t(x|z)) {\color{red}{p_\text{data}(z)}} dz = 0$$<p>Since the derivatives are w.r.t. $t$ and $x$, and the integral is over $z$, we can swap orders:</p>
+$$\frac{\partial}{\partial t} \int {p_t(x|z) p_\text{data}(z)} dz + \nabla \cdot ( \int p_t(x|z)u_t(x|z) {p_\text{data}(z)} dz ) = 0$$<p>The first term is the <strong>marginal distributuion</strong> $p_t(x)$, defined as</p>
+$$p_t(x) = \int p_t(x|z)p_{\text{data}}(z) dz$$<p>We then have:</p>
+$$\frac{\partial}{\partial t} p_t(x) + \nabla \cdot ( \int p_t(x|z)u_t(x|z) {p_\text{data}(z)} dz ) = 0$$<p>To make the second term match the form of the continuity equation, we define the <strong>marginal vector field</strong> $u_t(x)$ such that:</p>
+<div id="eq.6">
+$$u_t(x) = \int u_t(x|z) \frac{p_t(x|z) p_{\text{data}}(z)}{p_t(x)} dz \tag{6} $$
+</div>
+<p>Note the trick here—we have defined $u_t(x)$ such that the marginal pair $(p_t(x), u_t(x))$ also satisfies the continuity equation.</p>
+<p>While we are fortunate to have $u_t(x)$ in closed form, it remains <strong>intractable</strong> (we cannot integrate over all $z$). Nevertheless, we actually don&rsquo;t need to compute this integral, as we will see in the next section.</p>
+<h3 id="the-flow-matching-loss">The Flow Matching Loss<a hidden class="anchor" aria-hidden="true" href="#the-flow-matching-loss">#</a></h3>
+<p>With the marginal vector field $u_t(x)$ defined in <a href="#eq.6">Eq. 6</a>, the target for our neural network $u_t^{\theta}$ is clear. The definition of <strong>flow matching loss</strong> comes naturally:</p>
+<div id="eq.7">
+$$\mathcal{L}_{\text{FM}}(\theta) = \mathbb{E}_{t \sim U, x \sim p_t} [|| u_t^{\theta}(x) - u_t(x)  ||^2] \tag{7}$$
+</div>
+<p>where $U$ is a uniform distribution over $[0,1]$. Since $u_t(x)$ is intractable whatsoever, we consider its &ldquo;local&rdquo; counterpart: the conditional vector field $u_t(x|z)$. The <strong>conditional flow matching loss</strong> is defined as:</p>
+<div id="eq.8">
+$$\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim U, z \sim p_{\text{data}}, x \sim p_t(\cdot|z)} [|| u_t^{\theta}(x) - u_t(x | z) ||^2] \tag{8}$$
+</div>
+<p>The essential idea is: since we average over all data points $z$ anyways, wouldn&rsquo;t minimizing the &ldquo;local&rdquo; loss $\mathcal{L}_{\text{CFM}}$ also minimize the &ldquo;global&rdquo; loss $\mathcal{L}_{\text{FM}}$?</p>
+<blockquote>
+<p><strong>Theorem.</strong></p>
+<p>The losses $\mathcal{L}_{\text{FM}}(\theta)$ and $\mathcal{L}_{\text{CFM}}(\theta)$ are equivalent (up to a constant). Specifically, they share the same gradients:
+</p>
+$$\nabla_{\theta} \mathcal{L}_{\text{FM}}(\theta) = \nabla_{\theta} \mathcal{L}_{\text{CFM}}(\theta)  $$</blockquote>
+<h3 id="proof">Proof<a hidden class="anchor" aria-hidden="true" href="#proof">#</a></h3>
+<p>We first expand $\mathcal{L}_{\text{FM}}$ and $\mathcal{L}_{\text{CFM}}$ respectively. Note that the terms $||u_t(x)||^2$ and $||u_t(x|z)||^2$ do not depend on our parameter $\theta$, so we can treat them as constants $C_1, C_2$.</p>
+$$
+\begin{aligned}
+    \mathcal{L}_{\text{FM}} &= \mathbb{E}_{t \sim U, x \sim p_t} [|| u_t^{\theta}(x) ||^2] - 2 \mathbb{E}_{t \sim U, x \sim p_t} [u_t^{\theta}(x)^T {\color{blue}{u_t(x)}}] + C_1 \\\\
+\end{aligned}
+$$$$
+\begin{aligned}
+    \mathcal{L}_{\text{CFM}} &= \mathbb{E}_{t \sim U, z \sim p_{\text{data}}, x \sim p_t(\cdot|z)} [|| u_t^{\theta}(x) ||^2] - 2 \mathbb{E}_{t \sim U, z \sim p_{\text{data}}, x \sim p_t(\cdot|z)} [u_t^{\theta}(x)^T {\color{red}{u_t(x|z)}}] + C_2 \\\\
+\end{aligned}
+$$<p>The first terms are identical since $\mathbb{E}_{t,z,x}[f(x)] = \mathbb{E}_{t,x}[f(x)]$. It remains to compare the inner product terms. By substituting our definition of the marginal vector field $u_t(x)$ from <a href="#eq.6">Eq. 6</a>:</p>
+$$
+\begin{aligned}
+    \mathbb{E}_{t \sim U, x \sim p_t} [u_t^{\theta}(x)^T {\color{blue}{u_t(x)}}] &= \int \int p_t(x) u_t^{\theta}(x)^T \left[ \int u_t(x|z) \frac{p_t(x|z) p_{\text{data}}(z)}{p_t(x)} dz \right] dx dt \\\\
+    &= \int \int \int u_t^{\theta}(x)^T u_t(x|z) p_t(x|z) p_{\text{data}}(z) dz dx dt \\\\
+    &= \mathbb{E}_{t \sim U, z \sim p_{\text{data}}, x \sim p_t(\cdot|z)} [u_t^{\theta}(x)^T {\color{red}{u_t(x|z)}}]
+\end{aligned}
+$$<p>Since the inner products (and thus the gradients) are identical, the theorem follows.</p>
+<p>The key takeaway is that:</p>
+<blockquote>
+<p>By simply training our network to point toward individual data points $z$, it <strong>automatically</strong> learns to follow the complex, marginal flow of the entire distribution.</p>
+</blockquote>
+<p>We end the post with an example of explicitly calculating $\mathcal{L}_{\text{CFM}}$.</p>
+<details>
+  <summary style="cursor: pointer; color: #007bff; font-weight: bold;">
+    Example: $\mathcal{L}_{\text{CFM}}$ for Gaussian Paths
+  </summary>
+  <div style="padding: 10px; border-left: 2px solid #007bff; margin-top: 10px;">
+<p>Let us explicitly compute $\mathcal{L}_{\text{CFM}}$ in the case of Gaussian probability paths,</p>
+$$p_t(x|z) = \mathcal{N}(\alpha_tz, \beta_t^2I_d) $$<p>In this case, $x_t \sim p_t(\cdot | z)$ implies:</p>
+$$x_t = \alpha_tz + \beta_t\epsilon$$<p>where $\epsilon \sim \mathcal{N}(0, I_d)$.</p>
+<p>Recall from <a href="#eq.5">Eq. 5</a> that the conditional vector field was found to be:</p>
+$$u_t( x | z) =  (\dot{\alpha_t} - \frac{\dot{\beta_t}}{\beta_t}\alpha_t)z + \frac{\dot{\beta_t}}{\beta_t}x$$<p>Then, by <a href="#eq.8">Eq. 8</a>,</p>
+$$
+  \begin{aligned}
+      \mathcal{L}_{\text{CFM}} &= \mathbb{E}_{t \sim U, z\sim p_{\text{data}}, x \sim p_t} [|| u_t^{\theta}(x) - (\dot{\alpha_t} - \frac{\dot{\beta_t}}{\beta_t}\alpha_t)z - \frac{\dot{\beta_t}}{\beta_t}x ||^2] \\\\
+                               &= \mathbb{E}_{t \sim U, z\sim p_{\text{data}}, \epsilon \sim \mathcal{N}(0, I_d)} [ || u_t^{\theta}(\alpha_tz + \beta_t\epsilon) - (\dot{\alpha}_tz + \dot{\beta}_t\epsilon)||^2]
+  \end{aligned}
+  $$<p>The expression above can be further simplified if we explicitly set $\alpha_t=t, \beta_t=1-t$. We obtain:</p>
+$$\mathcal{L}_{\text{CFM}} = \mathbb{E}_{t \sim U, z\sim p_{\text{data}}, \epsilon \sim \mathcal{N}(0, I_d)} [ || u_t^{\theta}(tz + (1-t)\epsilon) - (z-\epsilon)||^2] $$<p>Note that both the sampling procedure (of $t, z, \epsilon$) and the computation of each term is incredibly simple.</p>
+  </div>
+</details>
+<h3 id="remarks--bibligraphy">Remarks &amp; Bibligraphy<a hidden class="anchor" aria-hidden="true" href="#remarks--bibligraphy">#</a></h3>
+<p>This post presents my understanding of the MIT course <em>Introduction to Flow Matching and Diffusion Models</em> (Holderrieth &amp; Erives, 2025). Refer to the <a href="https://diffusion.csail.mit.edu/">original source</a> for further details and explanations.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/tags/generative-ai/">Generative AI</a></li>
+      <li><a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/tags/diffusion/">Diffusion</a></li>
+      <li><a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/tags/flow/">Flow</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/">dStory</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

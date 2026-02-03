@@ -16,10 +16,10 @@ enableRobotsTXT = true
         subtitle = "I'm Donggyu Lee, Undergraduate Student @ SNU.ECE"
         imageUrl = "profile_mine.png" # Link to a square photo
         [[params.profileMode.buttons]]
-            name = "Blog Posts"
+            name = "Posts"
             url = "posts"
         [[params.profileMode.buttons]]
-            name = "Personal Website"
+            name = "About"
             url = "https://dg-lee23.github.io/"
 
     # Social Icons
@@ -36,3 +36,8 @@ enableRobotsTXT = true
 [markup.highlight]
     noClasses = false
     style = "monokai" # Good for Python/PyTorch code blocks
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      passthrough = { enable = true, delimiters = { block = [['$$', '$$']], inline = [['$', '$']] } }

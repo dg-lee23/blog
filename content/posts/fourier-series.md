@@ -1,13 +1,14 @@
 ---
-title: "Fourier Series - A Motivating Introduction"
+title: "Real Analysis Started With Fourier Series"
 date: 2026-01-13
 draft: false
 tags: ["Analysis", "Fourier Series"]
-summary: "How far can we get with trigonometric functions?"
+summary: How does smooth waves sum up to discontinuities?
 showToc: false
 weight: 1
 ---
 
+This post is my personal attempt to answer the question: Is Real Analysis just about learning pathological functions? **Where** and why did it start?
 
 ### The Motivating Problem
 Here's a bold claim that Fourier made in the 19th century:

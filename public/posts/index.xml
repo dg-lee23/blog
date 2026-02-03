@@ -6,14 +6,21 @@
     <description>Recent content in Posts on dStory</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Fourier Series</title>
+      <title>What Actually &#34;Flows&#34; in Flow Models?</title>
+      <link>https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/</link>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/flow-and-diffusion/</guid>
+      <description>How to transport noise into data using ODEs</description>
+    </item>
+    <item>
+      <title>Real Analysis Started With Fourier Series</title>
       <link>https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/fourier-series/</link>
       <pubDate>Tue, 13 Jan 2026 00:00:00 +0000</pubDate>
       <guid>https://turbo-space-cod-jq9q5wxvrxr345q-1313.app.github.dev/posts/fourier-series/</guid>
-      <description>How far can we get with trigonometric functions?</description>
+      <description>How does smooth waves sum up to discontinuities?</description>
     </item>
   </channel>
 </rss>
