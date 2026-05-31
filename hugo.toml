@@ -18,9 +18,9 @@ enableRobotsTXT = true
         [[params.profileMode.buttons]]
             name = "Posts"
             url = "posts"
-        [[params.profileMode.buttons]]
-            name = "About"
-            url = "https://dg-lee23.github.io/"
+        # [[params.profileMode.buttons]]
+        #     name = "About"
+        #     url = "https://dg-lee23.github.io/"
 
     # Social Icons
     [[params.socialIcons]]
