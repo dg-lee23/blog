@@ -1,4 +1,4 @@
-baseURL = 'https://dg-lee23.github.io/hugo-blog'
+baseURL = 'https://dg-lee23.github.io/blog'
 languageCode = 'en-us'
 title = 'dStory'
 theme = 'PaperMod'
