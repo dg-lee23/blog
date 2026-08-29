@@ -9,26 +9,30 @@ weight: 1
 ---
 
 ### Intro
-Think back to games like MapleStory or Pokémon. If you were a real fan, hearing the music alone brings the map back — vividly.
+In my childhood, I was a big fan of the game MapleStory. Even now, I can vividly recall the scenes from certain soundtracks. For instance, *Perion* is the land of brave warriors and tribes — and see how well the music fits:
 
 <div style="text-align: center; margin: 20px 0;">
-  <audio controls style="width: 100%; max-width: 500px;">
-    <source src="/static/audio/perion.mp3" type="audio/mpeg">
+  <img src="/images/perion.png" alt="Perion, MapleStory" style="width: 75%; max-width: 375px; display: block; margin: 0 auto;">
+  <audio controls style="width: 75%; max-width: 375px; display: block; margin: 10px auto 0;">
+    <source src="/audio/perion.mp3" type="audio/mpeg">
   </audio>
-  <img src="/static/images/perion.png" alt="Perion, MapleStory" style="width: 100%; max-width: 500px; margin-top: 10px;">
-  <p style="font-size: 0.9em; color: gray;">Perion, MapleStory</p>
+  <p style="font-size: 0.9em; color: gray; margin-top: 8px;">Perion, MapleStory</p>
 </div>
 
-But is that recall nostalgia, or is the map's character actually encoded in the music itself? In other words: if we played the same track to someone who's never touched the game, would they picture a similar scene?
+A real gamer would have their favorite song that perfectly fits the place. But is that connection
+simply nostalgia, or is the scene somehow actually encoded in the music itself? 
+
+The central question of the post is:
+> *Would a first-time-listener also picture a similar scene? That is, does game music encode the scene?* 
 
 
 ### Examples
-Start with the phenomenon itself. Listen to each of the four tracks below and picture the scene — you don't need to know MapleStory for this.
+Assuming that you have never played MapleStory, you can try this yourself: listen to each of the tracks below and try picturing the scene.
 
 <div class="audio-quiz-grid">
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/static/audio/ariant.mp3" data-label="Example 1">
+  <div class="track-player" data-audio="/audio/ariant.mp3" data-label="Example 1">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -40,14 +44,14 @@ Start with the phenomenon itself. Listen to each of the four tracks below and pi
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/static/images/ariant.png" alt="Ariant, MapleStory">
+    <img src="/images/ariant.png" alt="Ariant, MapleStory">
     <p><b>Ariant</b> — Desert</p>
   </details>
 </div>
 
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/static/audio/ellinia.mp3" data-label="Example 2">
+  <div class="track-player" data-audio="/audio/ellinia.mp3" data-label="Example 2">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -59,13 +63,13 @@ Start with the phenomenon itself. Listen to each of the four tracks below and pi
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/static/images/ellinia.png" alt="Ellinia, MapleStory">
+    <img src="/images/ellinia.png" alt="Ellinia, MapleStory">
     <p><b>Ellinia</b> — Forest</p>
   </details>
 </div>
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/static/audio/elnath.mp3" data-label="Example 3">
+  <div class="track-player" data-audio="/audio/elnath.mp3" data-label="Example 3">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -77,9 +81,66 @@ Start with the phenomenon itself. Listen to each of the four tracks below and pi
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/static/images/elnath.png" alt="Elnath, MapleStory">
+    <img src="/images/elnath.png" alt="Elnath, MapleStory">
     <p><b>Elnath</b> — Snow</p>
   </details>
+</div>
+
+<div class="audio-quiz">
+  <div class="track-player" data-audio="/audio/mine.mp3" data-label="Example 4">
+    <button class="play-btn" aria-label="Play">
+      <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="track-info">
+      <span class="track-label">Example 4</span>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+  <details class="reveal">
+    <summary>Reveal</summary>
+    <img src="/images/mine.png" alt="Mine, MapleStory">
+    <p><b>Mine</b> — Cave</p>
+  </details>
+</div>
+
+<div class="audio-quiz">
+  <div class="track-player" data-audio="/audio/sellas.mp3" data-label="Example 5">
+    <button class="play-btn" aria-label="Play">
+      <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="track-info">
+      <span class="track-label">Example 5</span>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+  <details class="reveal">
+    <summary>Reveal</summary>
+    <img src="/images/sellas.png" alt="Sellas, MapleStory">
+    <p><b>Sellas</b> — Ocean</p>
+  </details>
+</div>
+
+<div class="audio-quiz">
+  <div class="track-player" data-audio="/audio/partem.mp3" data-label="Example 6">
+    <button class="play-btn" aria-label="Play">
+      <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="track-info">
+      <span class="track-label">Example 6</span>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+  <details class="reveal">
+    <summary>Reveal</summary>
+    <img src="/images/partem.png" alt="Partem, MapleStory">
+    <p><b>Partem</b> — Jungle</p>
+  </details>
+</div>
+
+
 </div>
 
 <style>
@@ -182,12 +243,12 @@ The dataset was hand-collected from YouTube — [PLACEHOLDER: scraping/curation 
 
 | Biome | Segments | Tracks |
 |---|---|---|
-| Forest | [PLACEHOLDER] | [PLACEHOLDER] |
-| Desert | [PLACEHOLDER] | [PLACEHOLDER] |
-| Snow | [PLACEHOLDER] | [PLACEHOLDER] |
-| Ocean | [PLACEHOLDER] | [PLACEHOLDER] |
-| Cave | [PLACEHOLDER] | [PLACEHOLDER] |
-| Jungle | [PLACEHOLDER] | [PLACEHOLDER] |
+| Forest | 1023 | 89 |
+| Desert | 1498 | 131|
+| Snow | 801   | 71 |
+| Ocean | 717  | 88 |
+| Cave | 420   | 37 |
+| Jungle | 501 | 42 |
 
 representative tracks you might recognize: [PLACEHOLDER, 2 per class]
 
@@ -225,7 +286,7 @@ representative tracks you might recognize: [PLACEHOLDER, 2 per class]
     <rect x="350" y="70" width="100" height="60" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.85"/>
     <text x="400" y="95" text-anchor="middle" font-size="12" fill="currentColor">mean+std</text>
     <text x="400" y="112" text-anchor="middle" font-size="12" fill="currentColor">pool</text>
-    <text x="400" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">[PLACEHOLDER: dim]</text>
+    <text x="400" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">dim: 2048</text>
   </g>
 
   <line x1="450" y1="100" x2="500" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -235,7 +296,7 @@ representative tracks you might recognize: [PLACEHOLDER, 2 per class]
     <rect x="500" y="55" width="130" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
     <text x="565" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MLP</text>
     <text x="565" y="108" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(trained)</text>
-    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">[PLACEHOLDER: layers]</text>
+    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 2048 → 64 → 6</text>
   </g>
 
   <line x1="630" y1="100" x2="680" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -248,20 +309,20 @@ representative tracks you might recognize: [PLACEHOLDER, 2 per class]
 
 
 ```yaml
-backbone: MERT-v1-330M (frozen)
-pooling: mean+std  # [PLACEHOLDER: layer(s)]
-head: [PLACEHOLDER]  # e.g. 2048 -> 256 -> 6
-activation: [PLACEHOLDER]
-dropout: [PLACEHOLDER]
+backbone: MERT-v1-330M ❄️
+pooling: mean+std 
+pooled_dim: 2048
+head: 2048 → 64 → 6  # e.g. 2048 -> 256 -> 6
+activation: GELU 
+dropout: 0.3
 ```
 
 ```yaml
-optimizer: [PLACEHOLDER]
-lr: [PLACEHOLDER]
-schedule: [PLACEHOLDER]
-batch_size: [PLACEHOLDER]
-epochs: [PLACEHOLDER]
-split: [PLACEHOLDER]  # e.g. GroupShuffleSplit, 8:1:1
+optimizer: AdamW
+weight_decay: 1e-2
+lr: 1e-3
+batch_size: 64
+split: GroupShuffleSplit (7:1:2)
 ```
 
 </div>
@@ -270,22 +331,22 @@ split: [PLACEHOLDER]  # e.g. GroupShuffleSplit, 8:1:1
 
 ### Results
 
-**Model.** Dev / test weighted-F1:
+**Model.** Dev / test accuracy and weighted F1-score:
 
 ```yaml
-dev_f1:  [PLACEHOLDER]
-test_f1: [PLACEHOLDER]
+dev:  acc=0.596  f1=0.595
+test: acc=0.511  f1=0.507
 ```
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/cm_model.png" alt="Model confusion matrix" style="width: 100%; max-width: 420px;">
+  <img src="/images/cm_dev.png" alt="Model confusion matrix" style="width: 100%; max-width: 420px;">
   <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Test confusion matrix (model)</p>
 </div>
 
-**Human baseline.** Weighted-F1:
+**Human baseline.**:
 
 ```yaml
-human_f1: [PLACEHOLDER]
+human: acc=[PLACEHOLDER]  f1=[PLACEHOLDER]
 ```
 
 
