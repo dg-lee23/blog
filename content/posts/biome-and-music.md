@@ -315,8 +315,9 @@ We train a small MLP head on top of a pretrained audio embedding model, MERT [[1
 
 ```yaml
 backbone: MERT-v1-330M ❄️
-pooling: mean+std 
-pooled_dim: 2048
+layer-pool: mean
+time-pool: mean+std 
+feat-dim: 2048
 head: 2048 → 64 → 6  
 activation: GELU 
 dropout: 0.3
@@ -364,7 +365,7 @@ human: acc=[PLACEHOLDER]  f1=[PLACEHOLDER]
 
 
 ### Discussion
-Model performance matches the human baseline — but consider a pessimistic reading of this result.
+[TODO: comment onmodel vs human performance]
 
 Each biome likely has standard musical conventions: desert tracks might share a tempo/rhythm range distinct from forest tracks, certain keys or instrumentation recur within a class, and so on. Call these **cues** — boring, standard descriptors (tempo, rhythm, key, spectral shape) rather than anything resembling "atmosphere." Under this hypothesis, the model isn't recovering the same holistic scene the listener imagines; it's just exploiting these cues, and happens to land at human-level F1 by doing so.
 
