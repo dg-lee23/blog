@@ -1,67 +1,74 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on dStory</title>
-    <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/</link>
+    <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/</link>
     <description>Recent content in Tags on dStory</description>
-    <generator>Hugo -- 0.157.0</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 28 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Audio</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/audio/</link>
-      <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/audio/</guid>
-      <description></description>
-    </item>
+    <atom:link href="https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MERT</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/mert/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/mert/</link>
       <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/mert/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/mert/</guid>
       <description></description>
     </item>
     <item>
-      <title>Music Information Retrieval</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/music-information-retrieval/</link>
+      <title>Video Game Music</title>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/video-game-music/</link>
       <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/music-information-retrieval/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/video-game-music/</guid>
       <description></description>
     </item>
     <item>
       <title>Diffusion</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/diffusion/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/diffusion/</link>
       <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/diffusion/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/diffusion/</guid>
       <description></description>
     </item>
     <item>
       <title>Flow</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/flow/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/flow/</link>
       <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/flow/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/flow/</guid>
       <description></description>
     </item>
     <item>
       <title>Generative AI</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/generative-ai/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/generative-ai/</link>
       <pubDate>Sun, 01 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/generative-ai/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/generative-ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Analysis</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/analysis/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/analysis/</link>
       <pubDate>Tue, 13 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/analysis/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/analysis/</guid>
       <description></description>
     </item>
     <item>
       <title>Fourier Series</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/fourier-series/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/fourier-series/</link>
       <pubDate>Tue, 13 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/fourier-series/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/fourier-series/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Audio</title>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/audio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/audio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Music Information Retrieval</title>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/music-information-retrieval/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/music-information-retrieval/</guid>
       <description></description>
     </item>
   </channel>

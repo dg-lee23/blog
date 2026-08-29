@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Audio on dStory</title>
-    <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/audio/</link>
+    <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/audio/</link>
     <description>Recent content in Audio on dStory</description>
-    <generator>Hugo -- 0.157.0</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 28 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/tags/audio/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/tags/audio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TITLE_TBD</title>
-      <link>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/posts/biome-and-music/</link>
+      <link>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/posts/biome-and-music/</link>
       <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/posts/biome-and-music/</guid>
+      <guid>https://sturdy-computing-machine-7566wvr4vrcp5pp-1314.app.github.dev/posts/biome-and-music/</guid>
       <description>SUMMARY_TBD</description>
     </item>
   </channel>

@@ -1,9 +1,9 @@
 ---
-title: "TITLE_TBD"
+title: "Can You Hear the Biome? Game Music-to-Scene Classification"
 date: 2026-08-28
-draft: true
-tags: ["Audio", "Music Information Retrieval", "MERT"]
-summary: "SUMMARY_TBD"
+draft: false
+tags: ["Video Game Music", "Classification", "MERT"]
+summary: "Does video game music encode the scene, or merely stimulate nostalgia? "
 showToc: false
 weight: 1
 ---
@@ -19,15 +19,16 @@ In my childhood, I was a big fan of the game MapleStory. Even now, I can vividly
   <p style="font-size: 0.9em; color: gray; margin-top: 8px;">Perion, MapleStory</p>
 </div>
 
-A real gamer would have their favorite song that perfectly fits the place. But is that connection
-simply nostalgia, or is the scene somehow actually encoded in the music itself? 
+A real gamer would have their favorite song that perfectly fits the place. But is that connection simply nostalgia, or is the scene somehow actually encoded in the music itself? 
 
 The central question of the post is:
-> *Would a first-time-listener also picture a similar scene? That is, does game music encode the scene?* 
+> *Would a first-time-listener also picture a similar scene, or the **biome**? That is, does game music encode **biome**?* 
 
 
 ### Examples
 Assuming that you have never played MapleStory, you can try this yourself: listen to each of the tracks below and try picturing the scene.
+
+> HINT: 6 biome categories are used throughout this post: Forest, Desert, Snow, Ocean, Cave, Jungle.
 
 <div class="audio-quiz-grid">
 
@@ -136,7 +137,7 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   <details class="reveal">
     <summary>Reveal</summary>
     <img src="/images/partem.png" alt="Partem, MapleStory">
-    <p><b>Partem</b> — Jungle</p>
+    <p><b>Partem</b> — Jungle (Tropical) </p>
   </details>
 </div>
 
@@ -235,24 +236,28 @@ document.querySelectorAll('.track-player').forEach(player => {
 
 
 ### Method
-Our working hypothesis: if map OSTs really do encode the distinctive elements of their biome, we should be able to train a music → biome classifier on them directly. (Spoiler, if the examples above didn't already give it away: this is far from an easy task.)
+From the examples, we realize that this task is surprisingly challenging, at least for humans.
 
-We picked six representative biomes: **forest, desert, snow, ocean, cave, jungle**.
+Nevertheless, if these soundtracks really do encode the distinctive elements of their biome, we should be able to train a **music-conditioned biome classifier** on them directly.
 
-The dataset was hand-collected from YouTube — [PLACEHOLDER: scraping/curation summary, ~N hours of manual review]. We restricted to **modern-era** tracks [PLACEHOLDER: exact era boundary / how "modern" was defined — hardware generation vs. release year] to avoid confounding biome signal with chiptune/lo-fi production-era artifacts. Per-class counts:
+#### Data
+As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cave, jungle**. Video game tracks for each biome was manually collected from Youtube; fortunately, many curated playlists already exists (such as [this one](https://youtu.be/Jc_XyrzngZk?si=QIiROKQAJRc1D5NA)). Data count is shown below; each track was split into multiple 15-second **segments** for data regularization/augmentation.
 
-| Biome | Segments | Tracks |
-|---|---|---|
+<div style="display: flex; justify-content: center;">
+
+| Biome | Segments (15-sec.) | Tracks |
+|:---:|:---:|:---:|
 | Forest | 1023 | 89 |
-| Desert | 1498 | 131|
-| Snow | 801   | 71 |
-| Ocean | 717  | 88 |
-| Cave | 420   | 37 |
+| Desert | 1498 | 131 |
+| Snow | 801 | 71 |
+| Ocean | 717 | 88 |
+| Cave | 420 | 37 |
 | Jungle | 501 | 42 |
 
-representative tracks you might recognize: [PLACEHOLDER, 2 per class]
+</div> 
 
-**Architecture.** We freeze a pretrained MERT backbone and train a lightweight MLP head on top of its pooled representation:
+#### Architecture. 
+We train a small MLP head on top of a pretrained audio embedding model, MERT [[1]](#ref-mert). For this task, we did not find a specific layer of MERT consistently performing better than others, so we average them.
 
 <div style="text-align: center; margin: 24px 0;">
 <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 640px; font-family: inherit;">
@@ -312,7 +317,7 @@ representative tracks you might recognize: [PLACEHOLDER, 2 per class]
 backbone: MERT-v1-330M ❄️
 pooling: mean+std 
 pooled_dim: 2048
-head: 2048 → 64 → 6  # e.g. 2048 -> 256 -> 6
+head: 2048 → 64 → 6  
 activation: GELU 
 dropout: 0.3
 ```
@@ -372,3 +377,8 @@ human_f1: [PLACEHOLDER]       # from Results
 ```
 
 [PLACEHOLDER: interpretation — does cue-based model close the gap to MERT/human, or does a gap remain? What does that imply about whether MERT is capturing something beyond boring cues?]
+
+
+###  References
+<a id="ref-mert"></a>
+[1] Y. Li, R. Yuan, G. Zhang, Y. Ma, X. Chen, H. Yin, C. Lin, A. Ragni, E. Benetos, N. Gyenge, R. Dannenberg, R. Liu, W. Chen, G. Xia, Y. Shi, W. Huang, Y. Guo, and J. Fu, "MERT: Acoustic Music Understanding Model with Large-Scale Self-supervised Training," *arXiv preprint arXiv:2306.00107*, 2023.

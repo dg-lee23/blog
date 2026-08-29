@@ -1,3 +1,1 @@
 User-agent: *
-Disallow:
-Sitemap: https://cuddly-disco-9jwj94pr7wgfxqjp-1314.app.github.dev/sitemap.xml
