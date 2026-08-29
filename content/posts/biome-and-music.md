@@ -12,10 +12,10 @@ weight: 1
 In my childhood, I was a big fan of the game MapleStory. Even now, I can vividly recall the scenes from certain soundtracks. For instance, *Perion* is the land of brave warriors and tribes — and see how well the music fits:
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/perion.png" alt="Perion, MapleStory" style="width: 75%; max-width: 375px; display: block; margin: 0 auto;">
+  <img src="../../images/perion.png" alt="Perion, MapleStory" style="width: 75%; max-width: 375px; display: block; margin: 0 auto;">
   <audio controls style="width: 75%; max-width: 375px; display: block; margin: 10px auto 0;">
-    <source src="/audio/perion.mp3" type="audio/mpeg">
-  </audio>
+    <source src="../../audio/perion.mp3" type="audio/mpeg">
+  <../../audio/>
   <p style="font-size: 0.9em; color: gray; margin-top: 8px;">Perion, MapleStory</p>
 </div>
 
@@ -33,7 +33,7 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
 <div class="audio-quiz-grid">
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/ariant.mp3" data-label="Example 1">
+  <div class="track-player" data-audio="../../audio/ariant.mp3" data-label="Example 1">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -45,14 +45,14 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/ariant.png" alt="Ariant, MapleStory">
+    <img src="../../images/ariant.png" alt="Ariant, MapleStory">
     <p><b>Ariant</b> — Desert</p>
   </details>
 </div>
 
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/ellinia.mp3" data-label="Example 2">
+  <div class="track-player" data-audio="../../audio/ellinia.mp3" data-label="Example 2">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -64,13 +64,13 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/ellinia.png" alt="Ellinia, MapleStory">
+    <img src="../../images/ellinia.png" alt="Ellinia, MapleStory">
     <p><b>Ellinia</b> — Forest</p>
   </details>
 </div>
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/elnath.mp3" data-label="Example 3">
+  <div class="track-player" data-audio="../../audio/elnath.mp3" data-label="Example 3">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -82,13 +82,13 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/elnath.png" alt="Elnath, MapleStory">
+    <img src="../../images/elnath.png" alt="Elnath, MapleStory">
     <p><b>Elnath</b> — Snow</p>
   </details>
 </div>
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/mine.mp3" data-label="Example 4">
+  <div class="track-player" data-audio="../../audio/mine.mp3" data-label="Example 4">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -100,13 +100,13 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/mine.png" alt="Mine, MapleStory">
+    <img src="../../images/mine.png" alt="Mine, MapleStory">
     <p><b>Mine</b> — Cave</p>
   </details>
 </div>
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/sellas.mp3" data-label="Example 5">
+  <div class="track-player" data-audio="../../audio/sellas.mp3" data-label="Example 5">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -118,13 +118,13 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/sellas.png" alt="Sellas, MapleStory">
+    <img src="../../images/sellas.png" alt="Sellas, MapleStory">
     <p><b>Sellas</b> — Ocean</p>
   </details>
 </div>
 
 <div class="audio-quiz">
-  <div class="track-player" data-audio="/audio/partem.mp3" data-label="Example 6">
+  <div class="track-player" data-audio="../../audio/partem.mp3" data-label="Example 6">
     <button class="play-btn" aria-label="Play">
       <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
@@ -136,7 +136,7 @@ Assuming that you have never played MapleStory, you can try this yourself: liste
   </div>
   <details class="reveal">
     <summary>Reveal</summary>
-    <img src="/images/partem.png" alt="Partem, MapleStory">
+    <img src="../../images/partem.png" alt="Partem, MapleStory">
     <p><b>Partem</b> — Jungle (Tropical) </p>
   </details>
 </div>
@@ -241,7 +241,7 @@ From the examples, we realize that this task is surprisingly challenging, at lea
 Nevertheless, if these soundtracks really do encode the distinctive elements of their biome, we should be able to train a **music-conditioned biome classifier** on them directly.
 
 #### Data
-As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cave, jungle**. Video game tracks for each biome was manually collected from Youtube; fortunately, many curated playlists already exists (such as [this one](https://youtu.be/Jc_XyrzngZk?si=QIiROKQAJRc1D5NA)). Data count is shown below; each track was split into multiple 15-second **segments** for data regularization/augmentation.
+As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cave, jungle**. Video game tracks for each biome was manually collected from Youtube; fortunately, many curated playlists already exists (such as [this one](https:/youtu.be/Jc_XyrzngZk?si=QIiROKQAJRc1D5NA)). Data count is shown below; each track was split into multiple 15-second **segments** for data regularization/augmentation.
 
 <div style="display: flex; justify-content: center;">
 
@@ -260,7 +260,7 @@ As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cav
 We train a small MLP head on top of a pretrained audio embedding model, MERT [[1]](#ref-mert). For this task, we did not find a specific layer of MERT consistently performing better than others, so we average them.
 
 <div style="text-align: center; margin: 24px 0;">
-<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 640px; font-family: inherit;">
+<svg viewBox="0 0 720 200" xmlns="http:/www.w3.org/2000/svg" style="width: 100%; max-width: 640px; font-family: inherit;">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
@@ -345,7 +345,7 @@ test: acc=0.511  f1=0.507
 ```
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/cm_dev.png" alt="Model confusion matrix" style="width: 100%; max-width: 420px;">
+  <img src="../../images/cm_dev.png" alt="Model confusion matrix" style="width: 100%; max-width: 420px;">
   <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Test confusion matrix (model)</p>
 </div>
 
@@ -358,7 +358,7 @@ human: acc=[PLACEHOLDER]  f1=[PLACEHOLDER]
 
 
 <div style="text-align: center; margin: 20px 0;">
-  <img src="/images/cm_human.png" alt="Human confusion matrix" style="width: 100%; max-width: 420px;">
+  <img src="../../images/cm_human.png" alt="Human confusion matrix" style="width: 100%; max-width: 420px;">
   <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Confusion matrix (human raters)</p>
 </div>
 
