@@ -1,6 +1,6 @@
 ---
 title: "Can You Hear the Biome?"
-date: 2026-08-28
+date: 2026-08-30
 draft: false
 tags: ["Video Game Music", "Classification", "MERT"]
 summary: "Game music-to-biome classification: does music encode biome or just nostalgia?"
@@ -27,6 +27,7 @@ In this post, we make this an easier question by replacing **scene** with **biom
 
 
 ### Examples
+<a id="sec-examples"></a>
 Let us try this ourselves first. Each of the tracks below fall into one of the following biomes: Forest, Desert, Snow, Ocean, Cave, and Jungle. Can you guess which one is which?
 
 <div class="audio-quiz-grid">
@@ -349,11 +350,20 @@ Most Desert tracks, for instance, could share key, rhythm, spectral shape, instr
 
 To test this, we train a **cue-based classifier**: same MLP head, but fed 626 standard audio descriptors (extracted via librosa) instead of MERT embeddings. It scores only 0.233 F1 — far below both the model and human baseline.
 
+From this, we can deduce that game music does represent its biome to some extent. More importantly, *it* wasn't just nostalgia!
 
 ### Additional Results
+Here, we show the model's outputs for the six examples presented in the [Examples](#sec-examples) section above (unseen during training). While not perfectly accurate, do compare it to your initial guesses (for fun).
 
+<div style="text-align: center; margin: 20px 0;">
+  <img src="../../images/track_prediction_histograms.png" alt="Model prediction histograms for six example tracks" style="width: 100%; max-width: 700px;">
+  <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Model output distributions for the six tracks from [Examples](#sec-examples)</p>
+</div>
 
-
-###  References
+### References
 <a id="ref-mert"></a>
-[1] Y. Li, R. Yuan, G. Zhang, Y. Ma, X. Chen, H. Yin, C. Lin, A. Ragni, E. Benetos, N. Gyenge, R. Dannenberg, R. Liu, W. Chen, G. Xia, Y. Shi, W. Huang, Y. Guo, and J. Fu, "MERT: Acoustic Music Understanding Model with Large-Scale Self-supervised Training," *arXiv preprint arXiv:2306.00107*, 2023.
+[1] Y. Li *et al.*, "MERT: Acoustic Music Understanding Model with Large-Scale Self-supervised Training," *arXiv preprint arXiv:2306.00107*, 2023.
+
+---
+
+All MapleStory audio and imagery used in this post are property of Nexon Korea Corp., used here under Nexon's [non-commercial fan content guidelines](https://www.nexon.com/game-ip-guide).
