@@ -1,15 +1,15 @@
 ---
-title: "Can You Hear the Biome? Game Music-to-Scene Classification"
+title: "Can You Hear the Biome?"
 date: 2026-08-28
 draft: false
 tags: ["Video Game Music", "Classification", "MERT"]
-summary: "Does video game music encode the scene, or merely stimulate nostalgia? "
+summary: "Game music-to-biome classification: does music encode biome or just nostalgia?"
 showToc: false
 weight: 1
 ---
 
 ### Intro
-In my childhood, I was a big fan of the game MapleStory. Even now, I can vividly recall the scenes from certain soundtracks. For instance, *Perion* is the land of brave warriors and tribes — and see how well the music fits:
+In my childhood, I was a big fan of the game MapleStory. Some soundtracks still remind me of certain spots. For instance, *Perion* is the land of warriors and tribes — and see how well it fits:
 
 <div style="text-align: center; margin: 20px 0;">
   <img src="../../images/perion.png" alt="Perion, MapleStory" style="width: 75%; max-width: 375px; display: block; margin: 0 auto;">
@@ -19,16 +19,15 @@ In my childhood, I was a big fan of the game MapleStory. Even now, I can vividly
   <p style="font-size: 0.9em; color: gray; margin-top: 8px;">Perion, MapleStory</p>
 </div>
 
-A real gamer would have their favorite song that perfectly fits the place. But is that connection simply nostalgia, or is the scene somehow actually encoded in the music itself? 
+But is that fit simply nostalgia, or does the music somehow encode the characteristics of the place? In other words,
 
-The central question of the post is:
-> *Would a first-time-listener also picture a similar scene, or the **biome**? That is, does game music encode **biome**?* 
+> *Would a first-time-listener also picture a similar scene?* 
+
+In this post, we make this an easier question by replacing **scene** with **biome**.  
 
 
 ### Examples
-Assuming that you have never played MapleStory, you can try this yourself: listen to each of the tracks below and try picturing the scene.
-
-> HINT: 6 biome categories are used throughout this post: Forest, Desert, Snow, Ocean, Cave, Jungle.
+Let us try this ourselves first. Each of the tracks below fall into one of the following biomes: Forest, Desert, Snow, Ocean, Cave, and Jungle. Can you guess which one is which?
 
 <div class="audio-quiz-grid">
 
@@ -236,16 +235,14 @@ document.querySelectorAll('.track-player').forEach(player => {
 
 
 ### Method
-From the examples, we realize that this task is surprisingly challenging, at least for humans.
+While this is a challenging task even for humans, if these soundtracks really do encode the distinctive elements of their biome, we should be able to train a **music-to-biome classifier** on them.
 
-Nevertheless, if these soundtracks really do encode the distinctive elements of their biome, we should be able to train a **music-conditioned biome classifier** on them directly.
+**Data**
+We fix 6 representative biomes: **Forest, Desert, Snow, Ocean, Cave, Jungle**. Tracks were manually gathered from YouTube, mostly using curated playlists ([example](https:/youtu.be/Jc_XyrzngZk?si=QIiROKQAJRc1D5NA)). To augment/regularize data, tracks were split into 15-second **segments**. Dataset breakdown:
 
-#### Data
-As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cave, jungle**. Video game tracks for each biome was manually collected from Youtube; fortunately, many curated playlists already exists (such as [this one](https:/youtu.be/Jc_XyrzngZk?si=QIiROKQAJRc1D5NA)). Data count is shown below; each track was split into multiple 15-second **segments** for data regularization/augmentation.
+<div align="center">
 
-<div style="display: flex; justify-content: center;">
-
-| Biome | Segments (15-sec.) | Tracks |
+| Biome | Segments (15s) | Tracks |
 |:---:|:---:|:---:|
 | Forest | 1023 | 89 |
 | Desert | 1498 | 131 |
@@ -254,10 +251,10 @@ As mentioned, we fix 6 representative biomes: **forest, desert, snow, ocean, cav
 | Cave | 420 | 37 |
 | Jungle | 501 | 42 |
 
-</div> 
+</div>
 
-#### Architecture. 
-We train a small MLP head on top of a pretrained audio embedding model, MERT [[1]](#ref-mert). For this task, we did not find a specific layer of MERT consistently performing better than others, so we average them.
+**Architecture**
+We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio embedding model. Mean-pooling was applied across the layer and time axes to obtain a 1024-dim feature vector for each 15-second segment.
 
 <div style="text-align: center; margin: 24px 0;">
 <svg viewBox="0 0 720 200" xmlns="http:/www.w3.org/2000/svg" style="width: 100%; max-width: 640px; font-family: inherit;">
@@ -271,7 +268,7 @@ We train a small MLP head on top of a pretrained audio embedding model, MERT [[1
   <g>
     <rect x="10" y="70" width="90" height="60" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
     <path d="M20 100 L30 85 L40 115 L50 90 L60 110 L70 95 L80 105 L90 100" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
-    <text x="55" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">15s clip</text>
+    <text x="55" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">15s segment</text>
   </g>
 
   <line x1="100" y1="100" x2="150" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -281,7 +278,7 @@ We train a small MLP head on top of a pretrained audio embedding model, MERT [[1
     <rect x="150" y="55" width="150" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="225" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MERT</text>
     <text x="225" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(frozen)</text>
-    <text x="225" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">25 layers × 1024-d</text>
+    <text x="225" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">(num_layers=25, num_time_patch=1125, dim=1024)</text>
   </g>
 
   <line x1="300" y1="100" x2="350" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -289,9 +286,8 @@ We train a small MLP head on top of a pretrained audio embedding model, MERT [[1
   <!-- Pooling -->
   <g>
     <rect x="350" y="70" width="100" height="60" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.85"/>
-    <text x="400" y="95" text-anchor="middle" font-size="12" fill="currentColor">mean+std</text>
-    <text x="400" y="112" text-anchor="middle" font-size="12" fill="currentColor">pool</text>
-    <text x="400" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">dim: 2048</text>
+    <text x="400" y="105" text-anchor="middle" font-size="12" fill="currentColor">mean-pool</text>
+    <text x="400" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">dim=1024</text>
   </g>
 
   <line x1="450" y1="100" x2="500" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -301,38 +297,13 @@ We train a small MLP head on top of a pretrained audio embedding model, MERT [[1
     <rect x="500" y="55" width="130" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
     <text x="565" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MLP</text>
     <text x="565" y="108" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(trained)</text>
-    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 2048 → 64 → 6</text>
+    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
   </g>
 
-  <line x1="630" y1="100" x2="680" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+  <!-- <line x1="630" y1="100" x2="680" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/> 분포 histogram 추가하면 좋을듯? -->
 
-  <text x="700" y="105" text-anchor="middle" font-size="12" fill="currentColor">6</text>
 </svg>
 </div>
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin: 20px 0;">
-
-
-```yaml
-backbone: MERT-v1-330M ❄️
-layer-pool: mean
-time-pool: mean+std 
-feat-dim: 2048
-head: 2048 → 64 → 6  
-activation: GELU 
-dropout: 0.3
-```
-
-```yaml
-optimizer: AdamW
-weight_decay: 1e-2
-lr: 1e-3
-batch_size: 64
-split: GroupShuffleSplit (7:1:2)
-```
-
-</div>
-
 
 
 ### Results
