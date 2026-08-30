@@ -299,10 +299,22 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
     <rect x="500" y="55" width="130" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
     <text x="565" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MLP</text>
     <text x="565" y="118" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(trained)</text>
-    <text x="565" y="175" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
+    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
   </g>
 
-  <!-- <line x1="630" y1="100" x2="680" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/> 분포 histogram 추가하면 좋을듯? -->
+ <!-- Prediction: mini softmax bars, argmax highlighted -->
+  <g transform="translate(670, 60)">
+    <rect x="0" y="1" width="16" height="79" fill="currentColor" opacity="0.15"/>
+    <rect x="20" y="21" width="16" height="59" fill="currentColor" opacity="0.15"/>
+    <rect x="40" y="46" width="16" height="34" fill="currentColor" opacity="0.15"/>
+    <rect x="60" y="66" width="16" height="14" fill="currentColor" opacity="0.15"/>
+    <rect x="0" y="1" width="16" height="79" fill="none"/>
+    <!-- argmax bar -->
+    <rect x="-2" y="-6" width="80" height="86" fill="none"/>
+    <rect x="0" y="1" width="16" height="79" fill="#c0392b"/>
+    <line x1="-6" y1="80" x2="80" y2="80" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+  </g>
+  <text x="705" y="163" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">prediction</text>
 
 </svg>
 </div>
@@ -357,7 +369,7 @@ Here, we show the model's outputs for the six examples presented in the [Example
 
 <div style="text-align: center; margin: 20px 0;">
   <img src="../../images/track_prediction_histograms.png" alt="Model prediction histograms for six example tracks" style="width: 100%; max-width: 700px;">
-  <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Model output distributions for the six tracks from [Examples](#sec-examples)</p>
+  <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Model output distributions for the six tracks from Examples.</p>
 </div>
 
 ### References
