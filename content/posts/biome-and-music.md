@@ -278,7 +278,8 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
     <rect x="150" y="55" width="150" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
     <text x="225" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MERT</text>
     <text x="225" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(frozen)</text>
-    <text x="225" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7">(num_layers=25, num_time_patch=1125, dim=1024)</text>
+    <text x="225" y="160" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">n_layers=25, t_patches=1125</text>
+    <text x="225" y="173" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">dim=1024</text>
   </g>
 
   <line x1="300" y1="100" x2="350" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
@@ -296,8 +297,8 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
   <g>
     <rect x="500" y="55" width="130" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="2"/>
     <text x="565" y="90" text-anchor="middle" font-size="15" font-weight="bold" fill="currentColor">MLP</text>
-    <text x="565" y="108" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(trained)</text>
-    <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
+    <text x="565" y="118" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">(trained)</text>
+    <text x="565" y="175" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
   </g>
 
   <!-- <line x1="630" y1="100" x2="680" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/> 분포 histogram 추가하면 좋을듯? -->
@@ -308,29 +309,26 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
 
 ### Results
 
-**Model.** Dev / test accuracy and weighted F1-score:
+We report the model test and human results below.
 
-```yaml
-dev:  acc=0.596  f1=0.595
-test: acc=0.511  f1=0.507
-```
+| | Accuracy | Weighted F1 |
+|---|:---:|:---:|
+| Model (dev) | 0.596 | 0.595 |
+| Model (test) | 0.511 | 0.507 |
+| Human | [PLACEHOLDER] | [PLACEHOLDER] |
 
-<div style="text-align: center; margin: 20px 0;">
-  <img src="../../images/cm_dev.png" alt="Model confusion matrix" style="width: 100%; max-width: 420px;">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0;">
+
+<div style="text-align: center;">
+  <img src="../../images/cm_model.png" alt="Model confusion matrix" style="width: 100%; max-width: 380px;">
   <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Test confusion matrix (model)</p>
 </div>
 
-**Human baseline.**:
+<div style="text-align: center;">
+  <img src="../../images/cm_human.png" alt="Human confusion matrix" style="width: 100%; max-width: 380px;">
+  <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Confusion matrix (human)</p>
+</div>
 
-```yaml
-human: acc=[PLACEHOLDER]  f1=[PLACEHOLDER]
-```
-
-
-
-<div style="text-align: center; margin: 20px 0;">
-  <img src="../../images/cm_human.png" alt="Human confusion matrix" style="width: 100%; max-width: 420px;">
-  <p style="font-size: 0.9em; color: gray; margin-top: 6px;">Confusion matrix (human raters)</p>
 </div>
 
 
