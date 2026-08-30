@@ -258,7 +258,7 @@ We fix 6 representative biomes: **Forest, Desert, Snow, Ocean, Cave, Jungle**. T
 We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio embedding model. Mean-pooling was applied across the layer and time axes to obtain a 1024-dim feature vector for each 15-second segment.
 
 <div style="text-align: center; margin: 24px 0;">
-<svg viewBox="0 0 720 200" xmlns="http:/www.w3.org/2000/svg" style="width: 100%; max-width: 640px; font-family: inherit;">
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 680px; font-family: inherit;">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
@@ -302,23 +302,23 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
     <text x="565" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7"> 1024 → 64 → 6 </text>
   </g>
 
- <!-- Prediction: mini softmax bars, argmax highlighted -->
-  <g transform="translate(670, 60)">
+  <line x1="630" y1="100" x2="675" y2="100" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.7"/>
+
+  <!-- Prediction: mini softmax bars, argmax highlighted -->
+  <g transform="translate(685, 60)">
     <rect x="0" y="1" width="16" height="79" fill="currentColor" opacity="0.15"/>
     <rect x="20" y="21" width="16" height="59" fill="currentColor" opacity="0.15"/>
     <rect x="40" y="46" width="16" height="34" fill="currentColor" opacity="0.15"/>
     <rect x="60" y="66" width="16" height="14" fill="currentColor" opacity="0.15"/>
     <rect x="0" y="1" width="16" height="79" fill="none"/>
     <!-- argmax bar -->
-    <rect x="-2" y="-6" width="80" height="86" fill="none"/>
     <rect x="0" y="1" width="16" height="79" fill="#c0392b"/>
     <line x1="-6" y1="80" x2="80" y2="80" stroke="currentColor" stroke-width="1" opacity="0.4"/>
   </g>
-  <text x="705" y="163" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">prediction</text>
+  <text x="720" y="163" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">prediction</text>
 
 </svg>
 </div>
-
 
 ### Results
 
@@ -362,7 +362,9 @@ Most Desert tracks, for instance, could share key, rhythm, spectral shape, instr
 
 To test this, we train a **cue-based classifier**: same MLP head, but fed 626 standard audio descriptors (extracted via librosa) instead of MERT embeddings. It scores only 0.233 F1 — far below both the model and human baseline.
 
-From this, we can deduce that game music does represent its biome to some extent. More importantly, *it* wasn't just nostalgia!
+This doesn't prove the model understands *atmosphere* in any deep sense — it might be picking up more sophisticated statistical patterns than key or tempo. But at least, it's not the boring kind. 
+
+More importantly, *it* wasn't just nostalgia!
 
 ### Additional Results
 Here, we show the model's outputs for the six examples presented in the [Examples](#sec-examples) section above (unseen during training). While not perfectly accurate, do compare it to your initial guesses (for fun).
