@@ -309,13 +309,12 @@ We train a small MLP head on top of MERT [[1]](#ref-mert), a pretrained audio em
 
 ### Results
 
-We report the model test and human results below.
+We report the model test and human results below. Surprisingly, our model outperforms human raters, despite it being trained on a modest-sized dataset (# tracks < 500).
 
 | | Accuracy | Weighted F1 |
 |---|:---:|:---:|
-| Model (dev) | 0.596 | 0.595 |
-| Model (test) | 0.511 | 0.507 |
-| Human | [PLACEHOLDER] | [PLACEHOLDER] |
+| Model (test) | 0.493 | 0.500 |
+| Human        | 0.385 | 0.383 |
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0;">
 
@@ -331,14 +330,25 @@ We report the model test and human results below.
 
 </div>
 
+**Observation**
+While the comparison above isn't entirely fair (different set of tracks were used), there are some interesting observations to make.
+
+- Ocean is the easiest to recognize.
+- Cave is hard to recognize--possibly due to lack of data.
+- Desert is easily recognized, but is often confused with Jungle.
+- Forest is the hardest to recognize for humans (lowest recall).
 
 
 ### Discussion
-[TODO: comment onmodel vs human performance]
 
-Each biome likely has standard musical conventions: desert tracks might share a tempo/rhythm range distinct from forest tracks, certain keys or instrumentation recur within a class, and so on. Call these **cues** — boring, standard descriptors (tempo, rhythm, key, spectral shape) rather than anything resembling "atmosphere." Under this hypothesis, the model isn't recovering the same holistic scene the listener imagines; it's just exploiting these cues, and happens to land at human-level F1 by doing so.
+While the results are understandable, this task requires understanding music *atmosphere*; a simple model trained on small data outperforming humans thus raises the question:
 
-To test this, we train a **cue-based classifier** — the same MLP head, but on standard hand-crafted descriptors (tempo, rhythm, key, spectral/timbral features) instead of MERT embeddings — and compare.
+> Is the model cheating by learning uninteresting, statistical descriptors of each biome?
+
+For example, most Desert tracks could share the same key, rhythm, spectral shape, instruments, and so on (call these **cues**--standard music descipors). The model could be 'cheating' by learning these instead of the *atmosphere*.
+
+
+To test this, we train a **cue-based classifier** — the same MLP head 
 
 ```yaml
 cue_model_f1: [PLACEHOLDER]
@@ -346,7 +356,7 @@ mert_model_f1: [PLACEHOLDER]  # from Results
 human_f1: [PLACEHOLDER]       # from Results
 ```
 
-[PLACEHOLDER: interpretation — does cue-based model close the gap to MERT/human, or does a gap remain? What does that imply about whether MERT is capturing something beyond boring cues?]
+
 
 
 ###  References
