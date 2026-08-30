@@ -9,7 +9,7 @@ weight: 1
 ---
 
 ### Intro
-In my childhood, I was a big fan of the game MapleStory. Some soundtracks still remind me of certain spots. For instance, *Perion* is the land of warriors and tribes — and see how well it fits:
+My favorite childhood game was MapleStory. Some soundtracks still remind me of certain spots. For instance, *Perion* is the land of warriors and tribes — and see how well it fits:
 
 <div style="text-align: center; margin: 20px 0;">
   <img src="../../images/perion.png" alt="Perion, MapleStory" style="width: 75%; max-width: 375px; display: block; margin: 0 auto;">
@@ -341,21 +341,16 @@ While the comparison above isn't entirely fair (different set of tracks were use
 
 ### Discussion
 
-While the results are understandable, this task requires understanding music *atmosphere*; a simple model trained on small data outperforming humans thus raises the question:
+While the results are understandable, this task requires understanding music *atmosphere*--so a small model outperforming humans raises a question:
 
-> Is the model cheating by learning uninteresting, statistical descriptors of each biome?
+> Is the model cheating by learning uninteresting, statistical cues?
 
-For example, most Desert tracks could share the same key, rhythm, spectral shape, instruments, and so on (call these **cues**--standard music descipors). The model could be 'cheating' by learning these instead of the *atmosphere*.
+Most Desert tracks, for instance, could share key, rhythm, spectral shape, instrumentation — call these **cues**, standard music descriptors. The model could be exploiting these instead of the *atmosphere* itself.
+
+To test this, we train a **cue-based classifier**: same MLP head, but fed 626 standard audio descriptors (extracted via librosa) instead of MERT embeddings. It scores only 0.233 F1 — far below both the model and human baseline.
 
 
-To test this, we train a **cue-based classifier** — the same MLP head 
-
-```yaml
-cue_model_f1: [PLACEHOLDER]
-mert_model_f1: [PLACEHOLDER]  # from Results
-human_f1: [PLACEHOLDER]       # from Results
-```
-
+### Additional Results
 
 
 
